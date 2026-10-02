@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Space | Ayush Yadav (ASH) - CSIT Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       APEX SPACE OBSIDIAN DARK THEME & DESIGN SYSTEM
+       ========================================================================== */
+    :root {
+      --bg-pitch: #060608;
+      --bg-sidebar: #0a0a0e;
+      --bg-card: rgba(15, 15, 20, 0.75);
+      --bg-card-hover: rgba(22, 22, 30, 0.85);
+      --bg-input: #121218;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.2);
+      --border-glow: rgba(56, 189, 248, 0.4);
+      --accent-cyan: #38bdf8;
+      --accent-indigo: #6366f1;
+      --accent-amber: #f59e0b;
+      --accent-green: #10b981;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --sidebar-width: 260px;
+      --radius-xl: 18px;
+      --radius-lg: 12px;
+      --radius-md: 8px;
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-pitch);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Subtle Animated Mesh & Grid Background */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bg-glow-top {
+      position: fixed;
+      top: -200px;
+      left: 30%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.12), transparent 70%);
+      filter: blur(80px);
+      z-index: 0;
+      pointer-events: none;
+      animation: pulseGlow 12s ease-in-out infinite alternate;
+    }
+
+    .bg-glow-bottom {
+      position: fixed;
+      bottom: -200px;
+      right: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.1), transparent 70%);
+      filter: blur(90px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes pulseGlow {
+      0% { opacity: 0.5; transform: scale(1); }
+      100% { opacity: 0.9; transform: scale(1.15); }
+    }
+
+    /* ==========================================================================
+       SIDEBAR NAVIGATION (APEX SPACE LAYOUT)
+       ========================================================================== */
+    aside.sidebar {
+      width: var(--sidebar-width);
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.5rem 1rem;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: var(--transition-smooth);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem;
+      margin-bottom: 1.5rem;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .brand-logo-icon {
+      width: 32px;
+      height: 32px;
+      background: #ffffff;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      display: inline-block;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    }
+
+    .brand-text {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .nav-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .nav-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      padding: 0 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.65rem 0.75rem;
+      border-radius: var(--radius-lg);
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: var(--transition-fast);
+      margin-bottom: 0.25rem;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-item.active {
+      border-left: 3px solid var(--accent-cyan);
+    }
+
+    .nav-item svg {
+      width: 18px;
+      height: 18px;
+      opacity: 0.7;
+    }
+
+    .nav-item:hover svg, .nav-item.active svg {
+      opacity: 1;
+      color: var(--accent-cyan);
+    }
+
+    /* Sidebar Footer User Profile (Matching Image) */
+    .sidebar-user {
+      padding: 0.85rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #000000;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .user-name {
+      font-size: 0.875rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .user-role {
+      font-size: 0.7rem;
+      color: var(--accent-amber);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .pill-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+
+    .pill-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--text-primary);
+    }
+
+    /* ==========================================================================
+       MAIN CONTENT CONTAINER & HEADER BAR
+       ========================================================================== */
+    main.main-content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      min-height: 100vh;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header.topbar {
+      height: 70px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      background: rgba(6, 6, 8, 0.8);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+
+    .search-box {
+      position: relative;
+      width: 380px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.55rem 1rem 0.55rem 2.4rem;
+      color: var(--text-primary);
+      font-size: 0.85rem;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: var(--transition-fast);
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.15);
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 15px;
+      height: 15px;
+      color: var(--text-muted);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: var(--accent-green);
+      font-size: 0.775rem;
+      font-weight: 600;
+    }
+
+    .status-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    .topbar-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.775rem;
+      color: var(--text-secondary);
+    }
+
+    /* Mobile Menu Toggle Button */
+    .mobile-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       BODY CONTENT & ANIMATED CARDS
+       ========================================================================== */
+    .content-area {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .page-header {
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .page-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.35rem;
+    }
+
+    .page-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* Apex Space Glass Card Base */
+    .apex-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: var(--transition-smooth);
+      margin-bottom: 1.75rem;
+    }
+
+    .apex-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.05);
+      transform: translateY(-3px);
+    }
+
+    /* Hero Banner Card */
+    .hero-card {
+      background: linear-gradient(135deg, rgba(20, 20, 28, 0.9) 0%, rgba(10, 10, 15, 0.8) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-name {
+      font-size: 2.75rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--accent-cyan);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-family: var(--font-mono);
+    }
+
+    .hero-bio-text {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 720px;
+      margin-bottom: 1.5rem;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-box {
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .stat-number {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+    }
+
+    .stat-label {
+      font-size: 0.725rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Projects Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .card-tag {
+      font-family: var(--font-mono);
+      font-size: 0.725rem;
+      color: var(--accent-cyan);
+      margin-bottom: 0.5rem;
+      display: block;
+      font-weight: 600;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .card-text {
+      color: var(--text-secondary);
+      font-size: 0.885rem;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tech-pill {
+      font-size: 0.725rem;
+      font-family: var(--font-mono);
+      padding: 0.2rem 0.55rem;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-secondary);
+    }
+
+    .action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-primary);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+
+    .action-link:hover {
+      color: var(--accent-cyan);
+      transform: translateX(3px);
+    }
+
+    /* Skills Grid */
+    .skills-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-category-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .skill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 0.85rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: var(--transition-fast);
+    }
+
+    .skill-item:hover {
+      background: rgba(56, 189, 248, 0.08);
+      border-color: rgba(56, 189, 248, 0.25);
+      color: var(--text-primary);
+    }
+
+    /* Career Goal Box */
+    .goal-box {
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(15, 15, 20, 0.8) 100%);
+    }
+
+    .goal-box-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent-amber);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .goal-quote {
+      font-size: 1.1rem;
+      font-weight: 500;
+      line-height: 1.7;
+      color: var(--text-primary);
+      font-style: italic;
+    }
+
+    /* Contact Buttons */
+    .contact-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-apex {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-lg);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      cursor: pointer;
+    }
+
+    .btn-cyan {
+      background: var(--accent-cyan);
+      color: #060608;
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+    }
+
+    .btn-cyan:hover {
+      background: #7dd3fc;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(56, 189, 248, 0.4);
+    }
+
+    .btn-glass {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+    }
+
+    .btn-glass:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Keyframe Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-in {
+      animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(18, 18, 24, 0.95);
+      border: 1px solid var(--accent-cyan);
+      color: var(--text-primary);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-lg);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: var(--transition-smooth);
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      aside.sidebar {
+        transform: translateX(-100%);
+      }
+
+      aside.sidebar.mobile-open {
+        transform: translateX(0);
+      }
+
+      main.main-content {
+        margin-left: 0;
+      }
+
+      .mobile-toggle {
+        display: block;
+      }
+
+      .search-box {
+        width: 200px;
+      }
+
+      .hero-card {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Animated Mesh Grid -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow-top"></div>
+  <div class="bg-glow-bottom"></div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span id="toastMsg">Copied to clipboard!</span>
+  </div>
+
+  <!-- Apex Space Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div>
+      <a href="#about" class="brand">
+        <span class="brand-logo-icon"></span>
+        <span class="brand-text">Apex Space</span>
+      </a>
+
+      <!-- Group 1: Portfolio -->
+      <div class="nav-group">
+        <div class="nav-label">PORTFOLIO</div>
+        <a href="#about" class="nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          About & Overview
+        </a>
+        <a href="#projects" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          Projects & Activities
+        </a>
+        <a href="#skills" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          Technical Skills
+        </a>
+      </div>
+
+      <!-- Group 2: Academic & Goals -->
+      <div class="nav-group">
+        <div class="nav-label">ACADEMIC & GOALS</div>
+        <a href="#goal" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          1-Year Career Goal
+        </a>
+        <a href="#contact" class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          Contact & Socials
+        </a>
+      </div>
+    </div>
+
+    <!-- Sidebar Footer Profile Card (Matching Uploaded Image) -->
+    <div class="sidebar-user">
+      <div class="user-info">
+        <div class="user-avatar">ASH</div>
+        <div>
+          <div class="user-name">Ayush Yadav</div>
+          <div class="user-role">
+            👑 Administrator
+          </div>
+        </div>
+      </div>
+      <button class="pill-btn" onclick="copyEmail()">Contact</button>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+
+    <!-- Top Header Bar -->
+    <header class="topbar">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="searchInput" placeholder="Search projects, skills, activities...">
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="status-badge">
+          <span class="status-badge-dot"></span>
+          <span>Activities 1–4 Logged</span>
+        </div>
+        <div class="topbar-pill">
+          ⚡ CSIT B.Tech
+        </div>
+        <div class="topbar-pill">
+          Obsidian Dark
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Body -->
+    <div class="content-area">
+
+      <!-- Hero Section -->
+      <section id="about" class="animate-in">
+        <div class="apex-card hero-card">
+          <div>
+            <div class="status-badge" style="margin-bottom: 1rem;">
+              <span>ASH</span>
+              <span style="opacity: 0.5;">|</span>
+              <span>Computer Science & Information Technology</span>
+            </div>
+            <h1 class="hero-name">Ayush Yadav</h1>
+            <div class="hero-subtitle">CSIT Student • B.Tech 3rd Semester</div>
+            <p class="hero-bio-text">
+              A passionate Computer Science & Information Technology student focused on software engineering, 
+              web development, and algorithmic problem-solving. Constantly building projects, honing complexity analysis, 
+              and exploring open-source technologies.
+            </p>
+            <div class="stats-row">
+              <div class="stat-box">
+                <div class="stat-number">4 / 4</div>
+                <div class="stat-label">Activities Completed</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">Git & DSA</div>
+                <div class="stat-label">Core Focus</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">apexash-09</div>
+                <div class="stat-label">GitHub Handle</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="contact-buttons" style="flex-direction: column;">
+              <a href="https://github.com/apexash-09" target="_blank" rel="noopener" class="btn-apex btn-cyan">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub Profile
+              </a>
+              <button onclick="copyEmail()" class="btn-apex btn-glass">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                Copy Email
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="animate-in" style="animation-delay: 0.1s;">
+        <div class="page-header">
+          <h2 class="page-title">Projects & Activity Logs</h2>
+          <p class="page-desc">Structured documentation of coursework, collaborative pair programming, and DSA repositories.</p>
+        </div>
+
+        <div class="card-grid" id="projectsGrid">
+          
+          <!-- Card 1 -->
+          <div class="apex-card project-card search-target">
+            <div>
+              <span class="card-tag">// ACTIVITY 01</span>
+              <h3 class="card-title">Hello World & Git Foundations</h3>
+              <p class="card-text">
+                Established GitHub workflow, repository management, version control fundamentals, and deployed initial web projects using GitHub Pages.
+              </p>
+            </div>
+            <div>
+              <div class="tech-pills">
+                <span class="tech-pill">Git</span>
+                <span class="tech-pill">GitHub</span>
+                <span class="tech-pill">Version Control</span>
+                <span class="tech-pill">HTML/CSS</span>
+              </div>
+              <a href="https://github.com/apexash-09" target="_blank" rel="noopener" class="action-link">
+                View Repository ➔
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="apex-card project-card search-target">
+            <div>
+              <span class="card-tag">// ACTIVITY 02</span>
+              <h3 class="card-title">Pair Programming Collaboration Log</h3>
+              <p class="card-text">
+                Collaborative software development practice documenting driver-navigator roles, code reviews, pull requests, and git merge conflict resolution.
+              </p>
+            </div>
+            <div>
+              <div class="tech-pills">
+                <span class="tech-pill">Git Collaboration</span>
+                <span class="tech-pill">Markdown</span>
+                <span class="tech-pill">Peer Review</span>
+              </div>
+              <a href="https://github.com/apexash-09" target="_blank" rel="noopener" class="action-link">
+                View Log & PRs ➔
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="apex-card project-card search-target">
+            <div>
+              <span class="card-tag">// ACTIVITIES 03 & 04</span>
+              <h3 class="card-title">Algorithmic Repository & LeetCode</h3>
+              <p class="card-text">
+                Structured repository tracking daily algorithmic challenge solutions, time/space complexity analysis (Big-O), and optimized Data Structures & Algorithms implementations.
+              </p>
+            </div>
+            <div>
+              <div class="tech-pills">
+                <span class="tech-pill">C++</span>
+                <span class="tech-pill">Java</span>
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">DSA</span>
+                <span class="tech-pill">Big-O</span>
+              </div>
+              <a href="https://github.com/apexash-09" target="_blank" rel="noopener" class="action-link">
+                Explore Algorithmic Solutions ➔
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Technical Skills Section -->
+      <section id="skills" class="animate-in" style="animation-delay: 0.2s;">
+        <div class="page-header">
+          <h2 class="page-title">Technical Skills</h2>
+          <p class="page-desc">Core languages, development toolchains, and computer science concepts.</p>
+        </div>
+
+        <div class="skills-wrapper">
+          
+          <div class="apex-card search-target" style="margin-bottom:0;">
+            <div class="skill-category-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              Languages & Frameworks
+            </div>
+            <div class="skill-list">
+              <div class="skill-item"><span>C++</span> <span class="tech-pill">Core</span></div>
+              <div class="skill-item"><span>Java</span> <span class="tech-pill">OOP</span></div>
+              <div class="skill-item"><span>Python</span> <span class="tech-pill">Scripting</span></div>
+              <div class="skill-item"><span>HTML5 & CSS3</span> <span class="tech-pill">Web</span></div>
+              <div class="skill-item"><span>JavaScript</span> <span class="tech-pill">ES6+</span></div>
+            </div>
+          </div>
+
+          <div class="apex-card search-target" style="margin-bottom:0;">
+            <div class="skill-category-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              Tools & Platforms
+            </div>
+            <div class="skill-list">
+              <div class="skill-item"><span>Git</span> <span class="tech-pill">VCS</span></div>
+              <div class="skill-item"><span>GitHub</span> <span class="tech-pill">DevOps</span></div>
+              <div class="skill-item"><span>VS Code</span> <span class="tech-pill">IDE</span></div>
+              <div class="skill-item"><span>GitHub Pages</span> <span class="tech-pill">Deployment</span></div>
+            </div>
+          </div>
+
+          <div class="apex-card search-target" style="margin-bottom:0;">
+            <div class="skill-category-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path><path d="M6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"></path></svg>
+              Core CS Concepts
+            </div>
+            <div class="skill-list">
+              <div class="skill-item"><span>Data Structures & Algorithms</span> <span class="tech-pill">DSA</span></div>
+              <div class="skill-item"><span>Object-Oriented Programming</span> <span class="tech-pill">OOP</span></div>
+              <div class="skill-item"><span>Web Development</span> <span class="tech-pill">Frontend</span></div>
+              <div class="skill-item"><span>Version Control & PRs</span> <span class="tech-pill">Workflows</span></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 1-Year Career & Learning Goal -->
+      <section id="goal" class="animate-in" style="animation-delay: 0.3s;">
+        <div class="apex-card goal-box">
+          <div class="goal-box-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            1-Year Career & Learning Goal
+          </div>
+          <p class="goal-quote">
+            "To contribute to impactful open-source projects, master advanced full-stack development, and prepare for competitive open-source programs and global tech internships."
+          </p>
+        </div>
+      </section>
+
+      <!-- Contact & Socials Section -->
+      <section id="contact" class="animate-in" style="animation-delay: 0.4s;">
+        <div class="apex-card" style="text-align: center; padding: 3rem;">
+          <h2 class="page-title" style="margin-bottom: 0.5rem;">Connect with Ayush Yadav</h2>
+          <p class="page-desc" style="margin-bottom: 2rem;">Reach out for open-source contributions, peer programming, or technical discussions.</p>
+
+          <div class="contact-buttons" style="justify-content: center;">
+            <a href="mailto:apexms0905@gmail.com" class="btn-apex btn-cyan">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              apexms0905@gmail.com
+            </a>
+            <a href="https://github.com/apexash-09" target="_blank" rel="noopener" class="btn-apex btn-glass">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              GitHub (apexash-09)
+            </a>
+            <a href="https://linkedin.com/in/apexash-09" target="_blank" rel="noopener" class="btn-apex btn-glass">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.74a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24z"/></svg>
+              LinkedIn Profile
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Interactive JavaScript for Search, Copy Toast & Navigation -->
+  <script>
+    // Copy Email Toast
+    function copyEmail() {
+      navigator.clipboard.writeText('apexms0905@gmail.com');
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.innerText = 'Copied apexms0905@gmail.com!';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // Interactive Live Search Filter
+    const searchInput = document.getElementById('searchInput');
+    const searchTargets = document.querySelectorAll('.search-target');
+
+    searchInput.addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase().trim();
+      searchTargets.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        if (text.includes(term)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+
+    // Mobile Sidebar Toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    mobileToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('mobile-open');
+    });
+
+    // Active Section Link Highlight on Scroll
+    const navItems = document.querySelectorAll('.nav-item');
+    const sections = document.querySelectorAll('section');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 120) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('href') === '#' + current) {
+          item.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
