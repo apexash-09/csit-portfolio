@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ayush Yadav – CSIT Portfolio Brief & Prompt Log</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+    /* ── Print / PDF setup ── */
+    @page {
+      size: A4;
+      margin: 18mm 20mm;
+    }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #fff !important; }
+      .page-break { page-break-before: always; }
+      section { page-break-inside: avoid; }
+    }
+
+    /* ── Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #f4f6fa;
+      color: #1a1d2e;
+      font-size: 10.5pt;
+      line-height: 1.6;
+    }
+
+    .document {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 0;
+    }
+
+    /* ── Cover Header ── */
+    .cover {
+      background: #060608;
+      color: #f8fafc;
+      padding: 42px 48px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::after {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56,189,248,0.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .cover-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .cover-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-triangle {
+      width: 28px;
+      height: 28px;
+      background: #fff;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+
+    .brand-name {
+      font-size: 15pt;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .cover-meta {
+      text-align: right;
+      font-size: 8.5pt;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.8;
+    }
+
+    .cover-meta strong {
+      color: rgba(255,255,255,0.85);
+    }
+
+    .cover-name {
+      font-size: 28pt;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 60%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .cover-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5pt;
+      color: #38bdf8;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+    }
+
+    .cover-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 8pt;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.75);
+    }
+
+    .tag-cyan { border-color: rgba(56,189,248,0.5); color: #7dd3fc; }
+
+    .cover-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 20px 0 16px;
+    }
+
+    .cover-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 8.5pt;
+    }
+
+    .cover-links a {
+      color: #7dd3fc;
+      text-decoration: none;
+    }
+
+    /* ── Page Body sections ── */
+    .body-content {
+      padding: 36px 48px;
+    }
+
+    h1.section-heading {
+      font-size: 15pt;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: #060608;
+      margin-bottom: 4px;
+      padding-bottom: 8px;
+      border-bottom: 2.5px solid #38bdf8;
+    }
+
+    h2.section-heading {
+      font-size: 11.5pt;
+      font-weight: 700;
+      color: #1a1d2e;
+      margin-top: 22px;
+      margin-bottom: 8px;
+    }
+
+    p { margin-bottom: 10px; color: #374151; }
+
+    /* ── Info grid ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .info-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+
+    .info-box-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+      margin-bottom: 3px;
+    }
+
+    .info-box-value {
+      font-size: 10pt;
+      font-weight: 600;
+      color: #1a1d2e;
+    }
+
+    /* ── Project cards ── */
+    .project-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .project-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 14px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: #38bdf8;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .project-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.5pt;
+      color: #38bdf8;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .project-title {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: #1a1d2e;
+      margin-bottom: 4px;
+    }
+
+    .project-desc {
+      font-size: 9pt;
+      color: #64748b;
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    .tech-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tech-chip {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 1px 7px;
+      font-size: 7.5pt;
+      color: #475569;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── Skills ── */
+    .skills-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 9.5pt;
+    }
+
+    .skills-table thead tr {
+      background: #060608;
+      color: #f8fafc;
+    }
+
+    .skills-table th {
+      padding: 8px 12px;
+      text-align: left;
+      font-size: 8.5pt;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .skills-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #374151;
+    }
+
+    .skills-table tr:last-child td { border-bottom: none; }
+    .skills-table tr:nth-child(even) td { background: #f8fafc; }
+
+    /* ── Goal callout ── */
+    .goal-callout {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef9c3 100%);
+      border: 1px solid #fde68a;
+      border-left: 4px solid #f59e0b;
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-top: 16px;
+    }
+
+    .goal-callout-label {
+      font-size: 7.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #d97706;
+      margin-bottom: 6px;
+    }
+
+    .goal-callout p {
+      font-size: 10pt;
+      font-weight: 500;
+      color: #92400e;
+      font-style: italic;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ── Prompt Log ── */
+    .prompt-log-header {
+      background: #060608;
+      color: #f8fafc;
+      padding: 20px 48px 16px;
+    }
+
+    .prompt-log-header h1 {
+      font-size: 15pt;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      border-bottom: 2px solid rgba(56,189,248,0.4);
+      padding-bottom: 8px;
+    }
+
+    .prompt-log-header p {
+      color: rgba(255,255,255,0.55);
+      font-size: 8.5pt;
+      margin: 6px 0 0;
+    }
+
+    .prompt-entry {
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .prompt-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .prompt-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #060608;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8.5pt;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      flex-shrink: 0;
+    }
+
+    .prompt-label {
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #64748b;
+    }
+
+    .prompt-timestamp {
+      margin-left: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.5pt;
+      color: #94a3b8;
+    }
+
+    .prompt-body {
+      padding: 12px 14px;
+    }
+
+    .prompt-text {
+      font-size: 9.5pt;
+      color: #1a1d2e;
+      font-style: italic;
+      line-height: 1.55;
+      background: #f1f5f9;
+      border-left: 3px solid #38bdf8;
+      padding: 8px 12px;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 8px;
+    }
+
+    .prompt-change {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 9pt;
+      color: #374151;
+    }
+
+    .change-icon {
+      background: #dcfce7;
+      color: #16a34a;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 7pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── Footer ── */
+    .doc-footer {
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      padding: 14px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 7.5pt;
+      color: #94a3b8;
+    }
+
+    /* ── Print button ── */
+    .print-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #060608;
+      color: #38bdf8;
+      border: 1.5px solid #38bdf8;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 9.5pt;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .print-btn:hover { background: #38bdf8; color: #060608; }
+
+    hr.section-rule {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 24px 0;
+    }
+  </style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">⬇ Save as PDF</button>
+
+<div class="document">
+
+  <!-- ══════════════════════════════════════════════
+       PAGE 1 — PORTFOLIO BRIEF
+       ══════════════════════════════════════════════ -->
+
+  <!-- Cover Header -->
+  <div class="cover">
+    <div class="cover-top">
+      <div class="cover-brand">
+        <div class="brand-triangle"></div>
+        <span class="brand-name">Apex Space</span>
+      </div>
+      <div class="cover-meta">
+        <div><strong>Document Type:</strong> CSIT Portfolio Brief</div>
+        <div><strong>Date Generated:</strong> 03 October 2026</div>
+        <div><strong>Version:</strong> 1.0 — Final</div>
+      </div>
+    </div>
+
+    <div class="cover-name">Ayush Yadav</div>
+    <div class="cover-role">// CSIT Student · B.Tech 3rd Semester · SRN: R25EJ020</div>
+
+    <div class="cover-tags">
+      <span class="tag tag-cyan">Computer Science & IT</span>
+      <span class="tag">Software Engineering</span>
+      <span class="tag">Web Development</span>
+      <span class="tag">DSA & Algorithms</span>
+      <span class="tag">Open Source</span>
+    </div>
+
+    <div class="cover-divider"></div>
+
+    <div class="cover-links">
+      <span>🌐 <a href="https://apexash-09.github.io/csit-portfolio/">apexash-09.github.io/csit-portfolio</a></span>
+      <span>💻 <a href="https://github.com/apexash-09">github.com/apexash-09</a></span>
+      <span>🔗 <a href="https://linkedin.com/in/ayushy09">linkedin.com/in/ayushy09</a></span>
+      <span>⚡ <a href="https://leetcode.com/u/apexash-09/">leetcode.com/u/apexash-09</a></span>
+      <span>✉ apexms0905@gmail.com</span>
+    </div>
+  </div>
+
+  <!-- Section 1: About -->
+  <div class="body-content">
+
+    <h1 class="section-heading">1. Student Overview</h1>
+
+    <div class="info-grid">
+      <div class="info-box">
+        <div class="info-box-label">Full Name</div>
+        <div class="info-box-value">Ayush Yadav</div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-label">Student Registration Number (SRN)</div>
+        <div class="info-box-value">R25EJ020</div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-label">Programme</div>
+        <div class="info-box-value">B.Tech — Computer Science & IT (CSIT)</div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-label">Semester</div>
+        <div class="info-box-value">3rd Semester</div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-label">GitHub Handle</div>
+        <div class="info-box-value">apexash-09</div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-label">LeetCode Handle</div>
+        <div class="info-box-value">apexash-09</div>
+      </div>
+    </div>
+
+    <p>
+      A passionate Computer Science & Information Technology student focused on software engineering,
+      web development, and algorithmic problem-solving. Constantly building projects, honing complexity
+      analysis, and exploring open-source technologies. The live portfolio is built with an
+      <strong>Apex Space Obsidian Dark Glassmorphism</strong> theme and deployed on GitHub Pages.
+    </p>
+
+    <hr class="section-rule">
+
+    <!-- Section 2: Projects -->
+    <h1 class="section-heading">2. Coursework Activities & Projects</h1>
+    <p>The following three project cards are documented in the portfolio, summarising Activities 1 through 4:</p>
+
+    <div class="project-cards">
+
+      <div class="project-card">
+        <div class="project-number">// ACTIVITY 01</div>
+        <div class="project-title">Hello World & Git Foundations</div>
+        <div class="project-desc">
+          Established GitHub workflow, repository management, version control fundamentals, and deployed
+          initial web projects using GitHub Pages. Covers git init, commit, push, branching, and GitHub
+          Pages deployment workflow.
+        </div>
+        <div class="tech-row">
+          <span class="tech-chip">Git</span>
+          <span class="tech-chip">GitHub</span>
+          <span class="tech-chip">Version Control</span>
+          <span class="tech-chip">HTML/CSS</span>
+          <span class="tech-chip">GitHub Pages</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">// ACTIVITY 02</div>
+        <div class="project-title">Pair Programming Collaboration Log</div>
+        <div class="project-desc">
+          Collaborative software development practice documenting driver-navigator roles, code reviews,
+          pull requests, and git merge conflict resolution. Demonstrates understanding of team-based
+          development workflows and agile collaboration.
+        </div>
+        <div class="tech-row">
+          <span class="tech-chip">Git Collaboration</span>
+          <span class="tech-chip">Markdown</span>
+          <span class="tech-chip">Peer Code Review</span>
+          <span class="tech-chip">Pull Requests</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">// ACTIVITIES 03 & 04</div>
+        <div class="project-title">Algorithmic Problem Solving Repository & LeetCode</div>
+        <div class="project-desc">
+          Structured repository tracking daily algorithmic challenge solutions, time/space complexity
+          analysis (Big-O), and optimised Data Structures & Algorithms implementations. Solutions span
+          arrays, linked lists, trees, graphs, dynamic programming, and sorting algorithms.
+          Live profile: <strong>leetcode.com/u/apexash-09</strong>
+        </div>
+        <div class="tech-row">
+          <span class="tech-chip">C++</span>
+          <span class="tech-chip">Java</span>
+          <span class="tech-chip">Python</span>
+          <span class="tech-chip">Data Structures</span>
+          <span class="tech-chip">Algorithms</span>
+          <span class="tech-chip">Big-O Analysis</span>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="section-rule">
+
+    <!-- Section 3: Skills -->
+    <h1 class="section-heading">3. Technical Skills</h1>
+
+    <table class="skills-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Skills</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Languages</strong></td>
+          <td>C++, Java, Python, JavaScript, HTML5, CSS3</td>
+        </tr>
+        <tr>
+          <td><strong>Tools & Platforms</strong></td>
+          <td>Git, GitHub, VS Code, GitHub Pages</td>
+        </tr>
+        <tr>
+          <td><strong>Core CS Concepts</strong></td>
+          <td>Data Structures & Algorithms, Object-Oriented Programming (OOP), Version Control, Web Development</td>
+        </tr>
+        <tr>
+          <td><strong>Competitive Platforms</strong></td>
+          <td>LeetCode (apexash-09)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="section-rule">
+
+    <!-- Section 4: Goal -->
+    <h1 class="section-heading">4. 1-Year Career & Learning Goal</h1>
+
+    <div class="goal-callout">
+      <div class="goal-callout-label">⏱ Target Milestone — 2026–2027</div>
+      <p>"To contribute to impactful open-source projects, master advanced full-stack development,
+      and prepare for competitive open-source programs and global tech internships."</p>
+    </div>
+
+  </div>
+
+  <!-- Footer Page 1 -->
+  <div class="doc-footer">
+    <span>Ayush Yadav · SRN R25EJ020 · CSIT B.Tech 3rd Sem</span>
+    <span>Portfolio: apexash-09.github.io/csit-portfolio · Page 1 of 2</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       PAGE 2 — PROMPT LOG
+       ══════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+
+  <div class="prompt-log-header">
+    <h1>Prompt Log — AI-Assisted Portfolio Development</h1>
+    <p>Complete record of every prompt submitted and the corresponding change made to the portfolio.</p>
+  </div>
+
+  <div class="body-content">
+
+    <h1 class="section-heading" style="margin-top:0;">Prompt History (8 Iterations)</h1>
+    <p style="margin-bottom:18px; font-size:9pt; color:#64748b;">
+      Each entry shows the exact prompt, the timestamp, and a one-line summary of what changed in the portfolio.
+    </p>
+
+    <!-- Prompt 1 -->
+    <div class="prompt-entry">
+      <div class="prompt-meta">
+        <div class="prompt-num">01</div>
+        <div class="prompt-label">Initial Prompt — Portfolio Creation</div>
+        <div class="prompt-timestamp">30 Sep 2026 · 22:24</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-text">
+          "Create a single-page personal portfolio website as a standalone index.html file with Dark Mode
+          Glassmorphism theme. Include About, Projects (Activities 1–4), Skills, Career Goal, and Contact
+          sections. Name: Ayush Yadav, CSIT Student, B.Tech 3rd Semester. Use GitHub info already known."
+        </div>
+        <div class="prompt-change">
+          <span class="change-icon">CREATED</span>
+          <span>Built the complete single-page portfolio (index.html) with full glassmorphism CSS, all 5 sections,
+          GitHub handle apexash-09, email apexms0905@gmail.com, and 3 activity project cards.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prompt 2 -->
+    <div class="prompt-entry">
+      <div class="prompt-meta">
+        <div class="prompt-num">02</div>
+        <div class="prompt-label">Terminal Execution</div>
+        <div class="prompt-timestamp">30 Sep 2026 · 22:32</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-text">"yu only do this in terminal"</div>
+        <div class="prompt-change">
+          <span class="change-icon">DEPLOYED</span>
+          <span>Ran git init, git add, git commit in terminal — initialised the local repo and committed index.html.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prompt 3 -->
+    <div class="prompt-entry">
+      <div class="prompt-meta">
+        <div class="prompt-num">03</div>
+        <div class="prompt-label">Design Redesign — Apex Space Theme</div>
+        <div class="prompt-timestamp">30 Sep 2026 · 22:40</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-text">
+          "use designs and best animations like this colour too" [uploaded screenshot of Apex Space app
+          with obsidian dark sidebar, glassmorphic cards, and cyan accent palette]
+        </div>
+        <div class="prompt-change">
+          <span class="change-icon">REDESIGNED</span>
+          <span>Complete visual overhaul — Apex Space obsidian dark theme, fixed sidebar nav, animated grid
+          background, live search bar, copy-email toast, scroll-based nav highlight, Plus Jakarta Sans font.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prompt 4 -->
+    <div class="prompt-entry">
+      <div class="prompt-meta">
+        <div class="prompt-num">04</div>
+        <div class="prompt-label">Guidance Request</div>
+        <div class="prompt-timestamp">02 Oct 2026 · 18:06</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-text">"so next wt should i do"</div>
+        <div class="prompt-change">
+          <span class="change-icon">ADVICE</span>
+          <span>No code change — provided 5 recommended next steps: deploy to GitHub Pages, link real repos,
+          add real LinkedIn, build DSA repo, and create a GitHub profile README.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prompt 5 -->
+    <div class="prompt-entry">
+      <div class="prompt-meta">
+        <div class="prompt-num">05</div>
+        <div class="prompt-label">GitHub Push Error — remote origin exists</div>
+        <div class="prompt-timestamp">02 Oct 2026 · 18:11</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-text">
+          "error: remote origin already exists." [pasted PowerShell error from
+          git remote add origin https://github.com/apexash-09/csit-portfolio.git]
+        </div>
+        <div class="prompt-change">
+          <span class="change-icon">FIXED</span>
+          <span>Used git remote set-url to point origin to csit-portfolio, committed, and pushed successfully to GitHub.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prompt 6 -->
+    <div class="prompt-entry">
+      <div class="prompt-meta">
+        <div class="prompt-num">06</div>
+        <div class="prompt-label">GitHub Pages 404 Error</div>
+        <div class="prompt-timestamp">02 Oct 2026 · 18:17</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-text">
+          "y though ??" [uploaded screenshots: 404 error on apexash-09.github.io/csit-portfolio and
+          GitHub Pages settings showing site live]
+        </div>
+        <div class="prompt-change">
+          <span class="change-icon">FIXED</span>
+          <span>Root cause: git repo was initialised at C:\Users\apexm\ so index.html was committed as
+          OneDrive/Desktop/index.html, not at root. Re-initialised a clean repo in C:\Users\apexm\csit-portfolio\
+          and force-pushed with index.html at root level.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prompt 7 -->
+    <div class="prompt-entry">
+      <div class="prompt-meta">
+        <div class="prompt-num">07</div>
+        <div class="prompt-label">SRN & LinkedIn Update</div>
+        <div class="prompt-timestamp">02 Oct 2026 · 18:31</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-text">
+          "in the file beside csit add SRN:R25EJ020 and in contact add this linkedin profile when someone
+          click gets redirected www.linkedin.com/in/ayushy09"
+        </div>
+        <div class="prompt-change">
+          <span class="change-icon">UPDATED</span>
+          <span>Added SRN R25EJ020 in cyan monospace beside CSIT B.Tech in the topbar; updated LinkedIn
+          href from placeholder to linkedin.com/in/ayushy09.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prompt 8 -->
+    <div class="prompt-entry">
+      <div class="prompt-meta">
+        <div class="prompt-num">08</div>
+        <div class="prompt-label">LeetCode Profile Link</div>
+        <div class="prompt-timestamp">02 Oct 2026 · 18:40</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-text">
+          "in that algorithmic and leetcode put this so if anyone clicks there it takes them to leetcode
+          my profile" [uploaded screenshot of LeetCode Settings showing ID: apexash-09]
+        </div>
+        <div class="prompt-change">
+          <span class="change-icon">UPDATED</span>
+          <span>Changed the DSA project card's "Explore Solutions" link from GitHub to
+          leetcode.com/u/apexash-09 and updated button text to "View LeetCode Profile".</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-rule">
+
+    <!-- Summary table -->
+    <h2 class="section-heading" style="margin-top: 0;">Iteration Summary</h2>
+
+    <table class="skills-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Action Type</th>
+          <th>What Changed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>01</td><td>CREATED</td><td>Full portfolio built from scratch</td></tr>
+        <tr><td>02</td><td>DEPLOYED</td><td>Committed to local git repo via terminal</td></tr>
+        <tr><td>03</td><td>REDESIGNED</td><td>Apex Space dark obsidian theme + animations</td></tr>
+        <tr><td>04</td><td>ADVICE</td><td>Guidance on next steps (no code change)</td></tr>
+        <tr><td>05</td><td>FIXED</td><td>Resolved remote origin conflict, pushed to GitHub</td></tr>
+        <tr><td>06</td><td>FIXED</td><td>Fixed 404 — moved index.html to repo root</td></tr>
+        <tr><td>07</td><td>UPDATED</td><td>Added SRN R25EJ020 + correct LinkedIn URL</td></tr>
+        <tr><td>08</td><td>UPDATED</td><td>Linked DSA card to LeetCode profile</td></tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- Footer Page 2 -->
+  <div class="doc-footer">
+    <span>Ayush Yadav · SRN R25EJ020 · CSIT B.Tech 3rd Sem</span>
+    <span>Generated: 03 October 2026 · Page 2 of 2</span>
+  </div>
+
+</div>
+</body>
+</html>
